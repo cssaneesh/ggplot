@@ -1,0 +1,46 @@
+---
+title: "ggplot"
+author: "Saneesh"
+date: "12/15/2021"
+output: html_document
+---
+*Insatall and load required packages*
+```{r}
+# install.packages('ggplot2') do it only once
+library(ggplot2)
+```
+
+*Data*
+```{r}
+
+data("iris")
+head(iris, n=3) # print first 3 rows
+```
+*scatter plot of Sepal length (x) by Sepal width (y)*
+
+```{r}
+ggplot(iris, aes(x= Sepal.Length, y= Sepal.Width))+
+  geom_point()
+```
+
+*Control points color by groups*
+```{r}
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))+
+  geom_point(aes(color = Species)) # these colors are default in ggplot.
+```
+*To change colors manually*
+```{r}
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))+
+  geom_point(aes(color = Species))+
+  scale_color_manual(values = c("#00AFBB", "#E7B800", "#FC4E07"))
+```
+*To split the plot into multiple panels according to groping variable*
+```{r}
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))+
+  geom_point(aes(color = Species))+               
+  facet_wrap(~Species, ncol = 3, nrow = 1)+
+  scale_color_manual(values = c("#00AFBB", "#E7B800", "#FC4E07"))+
+  scale_fill_manual(values = c("#00AFBB", "#E7B800", "#FC4E07"))+
+  labs(x= 'Sepal width', y= 'Sepal length')
+```
+
